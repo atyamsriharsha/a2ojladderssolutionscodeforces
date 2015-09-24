@@ -2,8 +2,8 @@
 using namespace std ;
 
 char x[4500];
-long long int a,s[4500];
-long long int v[4500*4500],nv=0;
+long long int a,s[4000+7];
+long long int v[4007*4007],nv=0;
 int main()
 {
     cin >> a >> x;
