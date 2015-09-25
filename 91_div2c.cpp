@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std ;
 typedef long long int ll ;
-
 vector<ll> v;
 ll a, b;
 
@@ -21,12 +20,11 @@ int main()
 	go(0);
 	sort(v.begin(),v.end());
 	ll res = 0;
-	for(ll x : v) 
+	long long int *p = lower_bound(v.begin(),v.end(),a) ;
+	for(long long int i=a;i<=b;i++)
 	{
-		res += ll(x)*(min(x, b)-a+1);
-		a = x+1;
-		if(a>b) 
-			break;
+		p = lower_bound(v.begin()+*p,v.end(),i) ;
+		res+=*p ;
 	}
 	cout << res << endl;
 	return 0;
