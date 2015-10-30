@@ -1,51 +1,89 @@
 #include <bits/stdc++.h>
 using namespace std ;
-char in[101000];
-int stk[101000],sc;
-int cnt[101000];
-int pre[101000];
+const long long int maxN=100000+10;
+
+char s[maxN];
+long long int n,d[maxN];
+long long int st[maxN],ns,bot;
+
 int main()
 {
-    int i;
-    scanf("%s",in);
-    int n=strlen(in);
-    cnt[0]=0;
-    for(i=0;i<n;i++)
-    	pre[i]=-1;
-    for(i=1;i<=n;i++)
-    	cnt[i]=cnt[i-1]+(in[i-1]=='['?1:0);
-    for(i=0;i<n;i++)
+    scanf("%s",s+1); 
+    n=strlen(s+1);
+    d[0]=0;
+    for(long long int i=1;i<=n;i++)
+    { 
+    	d[i]=d[i-1]+(s[i]=='[');
+    }
+    ns=0; 
+    bot=1; 
+    st[0]=0;
+    long long int res=-1,u=0,v=0,i=1,j=1,cc;
+    while(i<=n&&j<=n)
     {
-        if(in[i]=='('||in[i]=='[')
-        {
-            stk[sc++]=i;
+        while(j<=n&&s[j]==']'||s[j]==')')
+        { 
+        	j++;
         }
-        else
+        if(j>n)
+        { 
+        	break;
+        }
+        if(s[i]=='(')
+        { 
+        	st[++ns]=i;
+        	i++;
+        }
+        else if(s[i]=='[')
+        { 
+        	st[++ns]=-i;
+        	i++;
+        }
+        else if(s[i]==')')
         {
-            if(sc==0||(in[stk[sc-1]]=='('&&in[i]==']')||(in[stk[sc-1]]=='['&&in[i]==')'))
+            if(ns==0||st[ns]<0)
             {
-                sc=0;
-                continue;
+            	ns=0; 
+            	st[ns]=i; 
+            	j=++i; 
+            	continue;
             }
-            pre[i]=stk[sc-1];
-            if(pre[i]>0&&pre[pre[i]-1]!=-1)
+            cc=abs(st[--ns])+1;
+            if(d[i]-d[cc-1]>res)
             {
-                pre[i]=pre[pre[i]-1];
+             	res=d[i]-d[cc-1];
+             	u=cc;
+             	v=i-cc+1;
             }
-            sc--;
+            i++;
+        }
+        else if(s[i]==']')
+        {
+            if(ns==0||st[ns]>0)
+            {
+            	ns=0; 
+            	st[ns]=i; 
+            	j=++i; 
+            	continue;
+            }
+            cc=abs(st[--ns])+1;
+            if(d[i]-d[cc-1]>res)
+            { 
+            	res=d[i]-d[cc-1];
+            	u=cc;
+            	v=i-cc+1;
+            }
+            i++;
         }
     }
-    int ma=0,ml=0,mr=-1;
-    for(i=0;i<n;i++)
-    {
-    	if(pre[i]!=-1&&ma<cnt[i+1]-cnt[pre[i]])
-    	{
-        	ma=cnt[i+1]-cnt[pre[i]];
-        	ml=pre[i];mr=i;
-    	}
+    s[u+v]=0;
+    if(res==-1)
+    { 
+     	cout << 0 << "\n" ;
     }
-    printf("%d\n",ma);
-    for(i=ml;i<=mr;i++)
-    	printf("%c",in[i]);
-    puts("");
+    else
+    { 
+    	cout << res << "\n" << s+u << "\n" ;
+    }
+    return 0;
 }
