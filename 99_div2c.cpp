@@ -13,8 +13,10 @@ bool match(string &A,string &B,int K)
         if(A.size() <= i || B.size()<=i)return false;
         if(A[A.size()-1-i] != B[B.size()-1-i])
             return false;
-        if(VO(A[A.size()-1-i]))K--;
-        if(K==0)return true;
+        if(VO(A[A.size()-1-i]))
+            K--;
+        if(K==0)
+            return true;
     }
     return false;
 }
