@@ -1,46 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std ;
+long long int num[100000+7];
+long long int a[100000+7];
 int main()
 {
-	long long int n,temp ;
-	long long int ans ;
+	long long int n ;
 	cin >> n ;
-	std::vector<long long int> v;
-	long long int v1[n+1] ;
-	v.push_back(0) ;
 	for(long long int i=0;i<n;i++)
 	{
-		cin >> temp ;
-		v.push_back(temp) ;
+		cin >> num[i] ;
 	}
-	ans =v[1] ;
-	//cout << ans ;
-	for(long long int i=1;i<=n/2;i++)
+	for(long long int i=0;i<n;i++)
 	{
-		v1[i]=i ;
-		//cout << i << " " << v1[i] << " " ;
-	}
-	for(long long int i=n/2+1;i<=n;i++)
-	{
-		v1[i]=n-i+1 ;
-	}
-	for(long long int i=1;i<=n;i++)
-	{
-		if(v[i]-ans+1>0)
-			v[i]=v[i]-ans+1 ;
-	}
-	//for(long long int i=0;i<n;i++)
-	//	cout << v1[i+1] << " " ;
-	long long int count1 = 0 ;
-	for(long long int i=1;i<=n;i++)
-	{
-	//	cout << v[i] << " " << v1[i] << "\n";
-		if(v[i]!=v1[i])
+		long long int t=min(i,n-1-i);
+		if(num[i]-t>0)
 		{
-			count1++ ;
+			a[num[i]-t]++;
 		}
 	}
-	cout << count1 ;
-	cout << "\n" ;
-	return 0 ;
-} 
+	long long int mx=-1;
+	for(long long int i=1;i<100000+7;i++)
+	{
+		mx=max(mx,a[i]);
+	}
+	cout << n-mx ;
+	return 0;
+}
