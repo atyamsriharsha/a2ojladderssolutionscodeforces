@@ -3,6 +3,7 @@ using namespace std ;
 std::vector<pair<pair<long long int,long long int>,long long int> > v;
 long long int n ;
 long long int ans[5001],cnt=0 ;
+
 bool func(pair<pair<long long int,long long int>,long long int> a,pair<pair<long long int,long long int>,long long int> b)
 {
 	if(a.first.first==b.first.first)
