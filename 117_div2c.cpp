@@ -12,6 +12,17 @@ int main()
 	}
 	long long int k ;
 	cin >> k ;
-	
+	long long int start =0 ;
+	for(long long int i=0;i<n;i++)
+	{
+		if(i-start>k)
+		{
+			start=start+1 ;
+		}
+		else
+		{
+			
+		}
+	}
 	return 0 ;
 } 
